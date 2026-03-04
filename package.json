@@ -1,0 +1,22 @@
+{
+  "name": "rtl-ai-chats",
+  "displayName": "RTL for AI Chats",
+  "description": "Permanent RTL support for Claude Code, Copilot, ChatGPT/Codex, and Gemini in VS Code. Auto-detects when extensions update and breaks RTL.",
+  "version": "1.0.0",
+  "publisher": "local",
+  "engines": { "vscode": "^1.85.0" },
+  "activationEvents": ["onStartupFinished"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rtl-ai-chats.reinjectAll",
+        "title": "RTL: Re-inject into All AI Agents"
+      },
+      {
+        "command": "rtl-ai-chats.checkStatus",
+        "title": "RTL: Show Injection Status"
+      }
+    ]
+  }
+}

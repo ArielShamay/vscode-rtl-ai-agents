@@ -1,0 +1,43 @@
+/* RTL AI Chats (injected) */
+/* Copilot Chat RTL support — CSS-only via unicode-bidi: plaintext
+ *
+ * Unlike the webview agents (Claude Code / Codex / Gemini), Copilot Chat
+ * uses VS Code's native Chat API and renders inside the main workbench DOM.
+ * It does NOT have the bidi-override problem — it just needs unicode-bidi:
+ * plaintext so the browser's BiDi algorithm determines paragraph direction
+ * from the first strong RTL/LTR character in each paragraph.
+ *
+ * text-align: start follows the computed direction (right for RTL paragraphs).
+ */
+
+/* ── Message content ─────────────────────────────────────────────────────── */
+.chat-markdown-part p,
+.chat-markdown-part li,
+.chat-markdown-part h1,
+.chat-markdown-part h2,
+.chat-markdown-part h3,
+.chat-markdown-part h4,
+.rendered-markdown p,
+.rendered-markdown li,
+.rendered-markdown h1,
+.rendered-markdown h2,
+.rendered-markdown h3,
+.rendered-markdown h4 {
+    unicode-bidi: plaintext;
+    text-align: start;
+}
+
+/* ── Code blocks must stay LTR ───────────────────────────────────────────── */
+.chat-markdown-part pre,
+.chat-markdown-part code,
+.rendered-markdown pre,
+.rendered-markdown code {
+    direction: ltr;
+    unicode-bidi: embed;
+    text-align: left;
+}
+
+/* ── Chat input ──────────────────────────────────────────────────────────── */
+.chat-input-part .monaco-editor .view-lines {
+    unicode-bidi: plaintext;
+}
