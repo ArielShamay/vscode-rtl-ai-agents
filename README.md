@@ -205,8 +205,3 @@ The webview injection works on all platforms. The workbench.html path for Copilo
 **Q: What if `fix-rtl.js` says `[SKIP] ... file not found`?**
 The extension is not installed, or is installed in a different directory. Check that the AI agent extension is installed and look for its folder in `~/.vscode/extensions/`.
 
----
-
-## License
-
-MIT
