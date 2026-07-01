@@ -22,7 +22,28 @@
 .rendered-markdown h1,
 .rendered-markdown h2,
 .rendered-markdown h3,
-.rendered-markdown h4 {
+.rendered-markdown h4,
+.chat-message .rendered-markdown p,
+.chat-message .rendered-markdown li,
+.chat-message .rendered-markdown blockquote,
+.interactive-item .rendered-markdown p,
+.interactive-item .rendered-markdown li,
+.interactive-response .rendered-markdown p,
+.interactive-response .rendered-markdown li,
+.interactive-request .rendered-markdown p,
+.interactive-request .rendered-markdown li,
+.chat-part .rendered-markdown p,
+.chat-part .rendered-markdown li,
+.chat-list-item .rendered-markdown p,
+.chat-list-item .rendered-markdown li,
+.monaco-list-row .rendered-markdown p,
+.monaco-list-row .rendered-markdown li,
+.monaco-list-row .chat-markdown-part p,
+.monaco-list-row .chat-markdown-part li,
+[class*="chat"] .rendered-markdown p,
+[class*="chat"] .rendered-markdown li,
+[class*="chat"] .chat-markdown-part p,
+[class*="chat"] .chat-markdown-part li {
     unicode-bidi: plaintext;
     text-align: start;
 }
@@ -38,6 +59,8 @@
 }
 
 /* ── Chat input ──────────────────────────────────────────────────────────── */
-.chat-input-part .monaco-editor .view-lines {
+.chat-input-part .monaco-editor .view-lines,
+.interactive-input-part .monaco-editor .view-lines,
+[class*="chat"] .monaco-editor .view-lines {
     unicode-bidi: plaintext;
 }

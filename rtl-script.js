@@ -31,6 +31,7 @@
         /* RTL containers (set by JS below) */
         [data-rtl-ai="1"] {
             direction: rtl !important;
+            unicode-bidi: plaintext !important;
             text-align: right !important;
         }
         [data-rtl-ai="1"] pre,
@@ -80,12 +81,36 @@
         '[class*="text-size-chat"]',
         '[class*="prose"]',
         '[class*="chatMessage"]',
+        '[class*="markdown-surface"]',
+        '[class*="markdownSurface"]',
+        '[class*="markdown"]',
+        '[class*="prompt-text"]',
+        '[class*="promptText"]',
+        '[class*="user-message"]',
+        '[class*="userMessage"]',
+        '[class*="assistant-message"]',
+        '[class*="assistantMessage"]',
+        '[class*="thread"] [class*="message"]',
+        '[class*="turn"] [class*="message"]',
+        '[data-testid*="message"]',
+        '[data-testid*="markdown"]',
         // Gemini Code Assist (Angular components)
         'app-message',
         'ncfc-message',
         'app-ai-chat',
         'gcf-message',
         'app-chat-message',
+        // Text blocks inside chat webviews. These are intentionally processed
+        // one block at a time so English/code-heavy sections do not inherit RTL.
+        'p',
+        'li',
+        'blockquote',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
     ].join(', ');
 
     // ── [4] RTL APPLICATION ───────────────────────────────────────────────────
@@ -142,13 +167,20 @@
                 // Skip elements that are part of the code editor (Monaco)
                 if (input.closest && input.closest('.monaco-editor')) return;
                 const text = input.value !== undefined ? input.value : (input.textContent || '');
-                if (!text.trim()) return;
+                if (!text.trim()) {
+                    input.style.removeProperty('direction');
+                    input.style.removeProperty('text-align');
+                    input.style.removeProperty('unicode-bidi');
+                    return;
+                }
                 if (containsRTL(text)) {
-                    input.style.direction = 'rtl';
-                    input.style.textAlign = 'right';
+                    input.style.setProperty('direction', 'rtl', 'important');
+                    input.style.setProperty('text-align', 'right', 'important');
+                    input.style.setProperty('unicode-bidi', 'plaintext', 'important');
                 } else {
-                    input.style.direction = 'ltr';
-                    input.style.textAlign = 'left';
+                    input.style.setProperty('direction', 'ltr', 'important');
+                    input.style.setProperty('text-align', 'left', 'important');
+                    input.style.setProperty('unicode-bidi', 'plaintext', 'important');
                 }
             });
         } catch (e) {}
